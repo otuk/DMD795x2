@@ -24,8 +24,8 @@ If you wired everything correctly you can run Simple_one_by_one_led  or Marquee 
 Refer to https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png  for basic wiring.
 
 yellow wires:  parallel data lines
-blue wire:  serial data line to firs 74HC595
-green wire:  serail data link from first to second 74HC595 
+<br>blue wire:  serial data line to firs 74HC595
+<br>green wire:  serail data link from first to second 74HC595 
 gray wire: serial clock
 orange wire: latch/register-clock wire
 red wire: 5V
