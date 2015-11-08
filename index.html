@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Dmd795x2 by otuk</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Dmd795x2</h1>
+        <h2>A simple game engine for a 8x8 dot matrix display and only 2 x 74HC795 riven by arduino uno</h2>
+        <a href="https://github.com/otuk/DMD795x2" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="dmd795x2" class="anchor" href="#dmd795x2" aria-hidden="true"><span class="octicon octicon-link"></span></a>DMD795x2</h1>
+
+<p>A simple game engine for a 8x8 dot matrix display using only 2 x 74HC795 driven by an arduino uno</p>
+
+<h1>
+<a id="what-is-this" class="anchor" href="#what-is-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is this?</h1>
+
+<ol>
+<li> A simple C based game engine for arduino &amp; dot matrix display</li>
+<li> A platform for you to build an arduino based retro game or applications (3 different examples supplied)</li>
+<li> A simple "no hidden magic" game engine for educational purposes</li>
+</ol>
+
+<h1>
+<a id="what-do-you-need" class="anchor" href="#what-do-you-need" aria-hidden="true"><span class="octicon octicon-link"></span></a>What do you need?</h1>
+
+<ol>
+<li>Arduino (UNO is used, but any arduino will do)</li>
+<li>2 x 74HC795 shift registers</li>
+<li>1 8x8 dot matrix display ( 16 pinned monocolor type is used)</li>
+<li>8 resistors appropriate to limit current to the dot matrix display you are using ( usually 220 - 470 Ohm will do)</li>
+<li>hookup wires &amp; breadboard</li>
+</ol>
+
+<p>[ Some of the examples use a buzzer for game sound and a thumb-joystick or buttons will be needed for game control ]</p>
+
+<h1>
+<a id="basic-wiring" class="anchor" href="#basic-wiring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Wiring:</h1>
+
+<p>If you wired everything correctly you can run Simple_one_by_one_led  or Marquee examples included.
+Refer to <a href="https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png">https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png</a>  for basic wiring.</p>
+
+<h1>
+<a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work?</h1>
+
+<p>The DMD795x2 library is a simple 2 file library.
+In a typicalx game loop, you are expected to update your game sprites/objects data including how they shd be drawn on display.
+After that you call the DMD_render_matrix() function to render display, and control frames per second with DMD_fps(int) function.</p>
+
+<p>Your typical arduino application/game will have a loop() function such as the following
+    update_the_game();  &lt;= you implement this application/game specific method
+    DMD_render_matrix(); &lt;= you just call this to display the latest state of game data
+    DMD_fps(30);  &lt;= you can play with FramesPerSecond rate to adjust for best view</p>
+
+<h1>
+<a id="important-functions" class="anchor" href="#important-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Important functions</h1>
+
+<p>unsigned short one_led = DMD_getpins(i,j) =&gt;  gives you a unsigned short , that is the data to turn ON one led at row i and column j
+                                                this is data ready to be added to the display data for that frame
+                                                DMD_render_matrix knows how to display these.</p>
+
+<p>DMD_reset_display_data()  =&gt;  Simply tells DMD_render_matrix to remove/reset any existing display data</p>
+
+<p>DMD_add_display_data( &amp;one_led, 1 )  =&gt;  each game object usually will have more than one led to be turned ON for its display so you pass an array
+                                          you can add to the current display data before the DMD_render_matrix call for that frame.
+                                          first argument is a pointer to the value received from getpins call and second is the length of</p>
+
+<p>The library and example files have plenty of comments that will help you to code your application in no time for your Retro Fun.</p>
+
+<p>Enjoy!</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/otuk/DMD795x2/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/otuk/DMD795x2/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/otuk/DMD795x2"></a> is maintained by <a href="https://github.com/otuk">otuk</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
