@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Dmd795x2</h1>
-        <h2>A simple game engine for a 8x8 dot matrix display and only 2 x 74HC795 riven by arduino uno</h2>
+        <h2>A simple game engine for a 8x8 dot matrix display using only 2 x 74HC795 driven by an arduino uno</h2>
         <a href="https://github.com/otuk/DMD795x2" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -32,6 +32,9 @@
 <a id="dmd795x2" class="anchor" href="#dmd795x2" aria-hidden="true"><span class="octicon octicon-link"></span></a>DMD795x2</h1>
 
 <p>A simple game engine for a 8x8 dot matrix display using only 2 x 74HC795 driven by an arduino uno</p>
+
+<p>The library is available as a .zip library file with examples to be added to your arduino IDE at:
+<a href="https://github.com/otuk/DMD795x2/">Library Repository</a></p>
 
 <h1>
 <a id="what-is-this" class="anchor" href="#what-is-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is this?</h1>
@@ -59,32 +62,51 @@
 <a id="basic-wiring" class="anchor" href="#basic-wiring" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Wiring:</h1>
 
 <p>If you wired everything correctly you can run Simple_one_by_one_led  or Marquee examples included.
-Refer to <a href="https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png">https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png</a>  for basic wiring.</p>
+Refer to <a href="https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png">https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png</a>  for basic wiring.
+[[<a href="https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png">https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png</a>]]</p>
+
+<p>yellow wires:  parallel data lines
+<br>blue wire:  serial data line to firs 74HC595
+<br>green wire:  serail data link from first to second 74HC595 
+<br>gray wire: serial clock
+<br>orange wire: latch/register-clock wire
+<br>red wire: 5V
+<br>white wire: GRD</p>
 
 <h1>
 <a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work?</h1>
 
-<p>The DMD795x2 library is a simple 2 file library.
-In a typicalx game loop, you are expected to update your game sprites/objects data including how they shd be drawn on display.
+<p>The DMD795x2 library is a simple 2 file library.</p>
+
+<p>In your game/application's setup() function you setup which 3 pins of arduino
+you will use to communicate with the 74HC595 shift-registers.</p>
+
+<p>For example;
+ DMD_setup_ctl_pins(8, 12, 11); </p>
+
+<p>That means:
+<br>Arduino (latchPin) pin 8   will be wired to  RCLK pin (pin#12) on 74HC595
+<br>Arduino (clockPin) pin 12 =&gt;  SRCLK-serial clock of 595 (pin#11) on 74HC595
+<br>Arduino (dataPin) pin 11 =&gt; SER -serial input pin of 595 (pin#14) on 74HC595</p>
+
+<p>And  in a typical game loop, you are expected to update your game sprites/objects data including how they shd be drawn on display.
 After that you call the DMD_render_matrix() function to render display, and control frames per second with DMD_fps(int) function.</p>
 
 <p>Your typical arduino application/game will have a loop() function such as the following
-    update_the_game();  &lt;= you implement this application/game specific method
-    DMD_render_matrix(); &lt;= you just call this to display the latest state of game data
-    DMD_fps(30);  &lt;= you can play with FramesPerSecond rate to adjust for best view</p>
+<br>update_the_game();  &lt;= you implement this application/game specific method
+<br>DMD_render_matrix(); &lt;= you just call this to display the latest state of game data
+<br>DMD_fps(30);  &lt;= you can play with FramesPerSecond rate to adjust for best view</p>
 
 <h1>
 <a id="important-functions" class="anchor" href="#important-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Important functions</h1>
 
-<p>unsigned short one_led = DMD_getpins(i,j) =&gt;  gives you a unsigned short , that is the data to turn ON one led at row i and column j
-                                                this is data ready to be added to the display data for that frame
-                                                DMD_render_matrix knows how to display these.</p>
+<p>a.  unsigned short one_led DMD_getpins(i,j) =&gt;  gives you a unsigned short , that is the data to turn ON one led at row i and column j this is data ready to be added to the display data for that frame</p>
 
-<p>DMD_reset_display_data()  =&gt;  Simply tells DMD_render_matrix to remove/reset any existing display data</p>
+<p>b.  void DMD_render_matrix knows how to display these.</p>
 
-<p>DMD_add_display_data( &amp;one_led, 1 )  =&gt;  each game object usually will have more than one led to be turned ON for its display so you pass an array
-                                          you can add to the current display data before the DMD_render_matrix call for that frame.
-                                          first argument is a pointer to the value received from getpins call and second is the length of</p>
+<p>c.  void DMD_reset_display_data()  =&gt;  Simply tells DMD_render_matrix to remove/reset any existing display data</p>
+
+<p>d.  void DMD_add_display_data( &amp;one_led, 1 )  =&gt;  each game object usually will have more than one led to be turned ON for its display so you pass an array and/or you can add to the current display data before the DMD_render_matrix call for that frame.  First argument is a pointer to the value received from getpins call and second is the length of</p>
 
 <p>The library and example files have plenty of comments that will help you to code your application in no time for your Retro Fun.</p>
 
