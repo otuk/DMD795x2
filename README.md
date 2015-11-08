@@ -22,7 +22,18 @@ Refer to https://github.com/otuk/DMD795x2/blob/master/DMD795x2_basic_wiring.png 
 
 #How does it work?
 The DMD795x2 library is a simple 2 file library.
-In a typicalx game loop, you are expected to update your game sprites/objects data including how they shd be drawn on display.
+
+In your game/application's setup() functionyou setup what 3 pins of arduino you will use to communicate with the 74HC595 shift-registers. For example;
+ DMD_setup_ctl_pins(8, 12, 11); 
+
+That means  
+ Arduino (latchPin) pin 8   will be wired to  RCLK pin (pin#12) on 74HC595
+ Arduino (clockPin) pin 12 =>  SRCLK-serial clock of 595 (pin#11) on 74HC595
+ Arduino (dataPin) pin 11 => SER -serial input pin of 595 (pin#14) on 74HC595
+
+
+
+And  in a typical game loop, you are expected to update your game sprites/objects data including how they shd be drawn on display.
 After that you call the DMD_render_matrix() function to render display, and control frames per second with DMD_fps(int) function.
 
 Your typical arduino application/game will have a loop() function such as the following
