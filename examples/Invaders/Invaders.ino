@@ -52,7 +52,7 @@ static void move_left_enemy(enemy_s* e){
   set_pos_enemy(e, e->posx, e->posy - 1);  
 }
 
-static bool move_down_enemy(enemy_s* e){
+static void move_down_enemy(enemy_s* e){
   set_pos_enemy(e, e->posx +1 , e->posy );      
 } 
 
@@ -147,7 +147,7 @@ static bool move_enemy_randomly(enemy_s* ep){
 //not used - for test only
 //if you want to test before adding a joystick/button to read input
 // you can use this to move hunter
-static bool move_hunter_randomly(hunter_s* hp){
+static void  move_hunter_randomly(hunter_s* hp){
     int r=random(0,35);
     if (r<3){
       move_left_hunter(hp);
@@ -210,7 +210,6 @@ static void show_hit(){
          hit_display[m++]=DMD_getpins(i,j);
       }
     }
-    hit_display[m]=0x00;
     DMD_reset_display_data();
     DMD_add_display_data(hit_display, m);
   }else{ 
@@ -232,7 +231,6 @@ static void show_game_lost(){
         lost_display[m++] = DMD_getpins(i,j);
       }
     };
-    lost_display[m] =0x00;
     DMD_reset_display_data();
     DMD_add_display_data(lost_display, m);
   }else{  

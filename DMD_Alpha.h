@@ -1,8 +1,5 @@
-#ifndef Marquee_h
-#define Marquee_h
-
-#define MAX_COL 7
-
+#ifndef  DMD_ALPHA_H
+#define DMD_ALPHA_H
 
 typedef struct{
   byte r; //rows 1...8
@@ -22,7 +19,7 @@ const pair_s l54=pair_s{5,4};const pair_s l55=pair_s{5,5};const pair_s l56=pair_
 const pair_s l61=pair_s{6,1};const pair_s l62=pair_s{6,2};const pair_s l63=pair_s{6,3};
 const pair_s l64=pair_s{6,4};const pair_s l65=pair_s{6,5};const pair_s l66=pair_s{6,6};
 
-const pair_s lend=pair_s{-1,-1};
+const pair_s lend=pair_s{0xFF,0xFF};
 
 ////// alphabet //////////
 const pair_s A[] ={
@@ -463,4 +460,3 @@ const pair_s* ALPHA[ALPHA_SIZE]= {space, exclamation, quote, pound, dollar, perc
                                U, V, W, X, Y, Z };                    
 
 #endif
-                       
