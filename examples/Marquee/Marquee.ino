@@ -1,5 +1,6 @@
 #include <DMD795x2.h>
-#include "Marquee.h"
+#include <DMD_Alpha.h>
+
 #include <string.h>  //strlen(
 #include <ctype.h>  //toupper(
 #include <math.h>  //ceil(
@@ -9,12 +10,13 @@
 #define LEDON_DELAY 28
 #define FPS 200
 #define INITIAL_SLIDE -15
+#define MAX_COL 7
 
 const byte ALPHA_WIDTH = 5;  // shd this not be a variable per letter, for better reading?
 const byte MAX_LETTERS_DISPLAYED = ceil((MAX_COL+1.)/ALPHA_WIDTH)+1;
 
 //char* text_to_scroll = " !\"#$%&'()*+,-./0123456789:;<=>?@A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  X";
-char* text_to_scroll = "  The quick brown fox jumps over the lazy dog 0123456789   X";// need a last visible character to signal end of string to display
+const char* text_to_scroll = "  The quick brown fox jumps over the lazy dog 0123456789   X";// need a last visible character to signal end of string to display
 //const char* text_to_scroll = "    Once upon a time, sixty years ago, a little girl lived in the \
 //Big Woods of Wisconsin, in a little gray house made of logs. \
 //\
@@ -24,13 +26,9 @@ char* text_to_scroll = "  The quick brown fox jumps over the lazy dog 0123456789
 short tlen =  strlen(text_to_scroll);
 
 const pair_s* get_letter(const char* c){
- byte idx = toupper(*c)-32;
-  if(idx<0 || idx>=ALPHA_SIZE){
-//      idx = toupper(*c)-32;
-//      if(idx<0 || idx>PUNC_SIZE-1){
-        return NOTYET;
-//      }
-//      return PUNC[idx];
+  byte idx = toupper(*c)-32;
+  if(idx >= ALPHA_SIZE){
+    return NOTYET;
   }
   return ALPHA[idx];  
 }
@@ -57,8 +55,8 @@ void update_the_game(){
     long long shift = ((SPD-slide)/SPD) + le*ALPHA_WIDTH ; //how much shd each letter be shifted to the left
     byte ldot = 0;    
     const pair_s* alfa = get_letter(text_to_scroll+le);
-    for(;;){ // loop thgru the dots of a single letter - alfa, and decide if they shd be shown based on shift
-      if (alfa[ldot].c<0) // but first check if this is the last dot of the letter, ie if it is "lend"
+    for(;;){ // loop thru the dots of a single letter - alfa, and decide if they shd be shown based on shift
+      if (alfa[ldot].c == lend.c) // but first check if this is the last dot of the letter, ie if it is "lend"
         break;
       long long col = alfa[ldot].c+ shift ; // apply shift
       if (col > MAX_COL){ // check if after shift the letter is visible ie within the max-column
