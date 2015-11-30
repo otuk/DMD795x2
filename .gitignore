@@ -1,3 +1,4 @@
 *.fzz
 *~
-.DS_Store
+*.DS_Store
+videos/*
