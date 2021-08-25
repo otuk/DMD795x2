@@ -17,7 +17,7 @@ https://github.com/otuk/DMD795x2/
 4. 8 resistors appropriate to limit current to the dot matrix display you are using ( usually 220 - 470 Ohm will do)
 5. hookup wires & breadboard
 
-[ Some of the examples use a buzzer for game sound and a thumb-joystick or buttons will be needed for game control ]
+Some of the examples use a buzzer for game sound and a thumb-joystick or buttons will be needed for game control
 
 #Basic Wiring:
 If you wired everything correctly you can run Simple_one_by_one_led  or Marquee examples included.
